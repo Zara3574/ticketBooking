@@ -28,7 +28,7 @@ const FilteredResults = ({ navigation, route }) => {
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.icon}>
                     <Ionicons name="arrow-back" size={24} color="#000" />
                 </TouchableOpacity>
-                <Text style={styles.fontStyle}>3 Results Found</Text>
+                <Text style={styles.fontStyle}>{results.length} Result Found</Text>
             </View>
             <View style={{backgroundColor:'#ededed'}}>
                 <FlatList

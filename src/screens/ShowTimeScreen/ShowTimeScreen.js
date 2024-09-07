@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image,FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import styles from './styles';
 
 const ShowTimesScreen = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState('5 Mar');
-  
+
   // Sample dates and showtimes data
   const dates = ['5 Mar', '6 Mar', '7 Mar', '8 Mar', '9 Mar'];
   const showtimes = [
-    { time: '12:30', hall: 'Cinetech + Hall 1', price: '50$', bonus: '2500 bonus', image: 'path_to_image' },
-    { time: '13:30', hall: 'Cinetech + Hall 2', price: '75$', bonus: '3000 bonus', image: 'path_to_image' }
+    { time: '12:30', hall: 'Cinetech + Hall 1', price: '50$', bonus: '2500 bonus', image: require('../../assets/images/Img1.jpg') },
+    { time: '13:30', hall: 'Cinetech + Hall 2', price: '75$', bonus: '3000 bonus', image: require('../../assets/images/Img1.jpg') }
   ];
-
+function handleSeatSelectionNav()
+{
+  navigation.navigate("SeatSelection")
+}
   return (
     <View style={styles.container}>
       {/* Header with back button */}
@@ -19,8 +23,11 @@ const ShowTimesScreen = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
-        <Text style={styles.movieTitle}>The King's Man</Text>
-        <Text style={styles.subTitle}>In Theaters December 22, 2021</Text>
+        <View style={{ flex: 1, alignItems: 'center', }}>
+          <Text style={styles.movieTitle}>The King's Man</Text>
+          <Text style={styles.subTitle}>In Theaters December 22, 2021</Text>
+        </View>
+
       </View>
 
       {/* Date Selector */}
@@ -28,9 +35,9 @@ const ShowTimesScreen = ({ navigation }) => {
         <Text style={styles.dateLabel}>Date</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {dates.map((date, index) => (
-            <TouchableOpacity 
-              key={index} 
-              style={[styles.dateButton, selectedDate === date && styles.selectedDate]} 
+            <TouchableOpacity
+              key={index}
+              style={[styles.dateButton, selectedDate === date && styles.selectedDate]}
               onPress={() => setSelectedDate(date)}
             >
               <Text style={styles.dateText}>{date}</Text>
@@ -40,23 +47,24 @@ const ShowTimesScreen = ({ navigation }) => {
       </View>
 
       {/* Showtimes */}
-      <ScrollView style={styles.showtimesSection}>
-        {showtimes.map((show, index) => (
-          <View key={index} style={styles.showtimeContainer}>
-            <View style={styles.showtimeBox}>
-              <Image source={{uri: show.image}} style={styles.seatImage} />
-              <View style={styles.showtimeInfo}>
-                <Text style={styles.showtimeText}>{show.time}</Text>
-                <Text style={styles.hallText}>{show.hall}</Text>
-                <Text style={styles.priceText}>From {show.price} or {show.bonus}</Text>
-              </View>
-            </View>
+      <FlatList
+      data={showtimes}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => (
+        <View style={styles.showtimeContainer}>
+         <View style={styles.showtimeInfo}>
+            <Text style={styles.showtimeText}>{item.time}</Text>
+            <Text style={styles.hallText}>{item.hall}</Text>
           </View>
-        ))}
-      </ScrollView>
-
-      {/* Select Seats Button */}
-      <TouchableOpacity style={styles.selectButton}>
+          <View style={styles.showtimeBox}>
+            <Image source={require('../../assets/images/seating.png')} style={styles.seatImage} />
+          </View>
+          <Text style={styles.priceText}>From {item.price} or {item.bonus}</Text>
+        </View>
+      )}
+      contentContainerStyle={styles.showtimesSection} horizontal={true} 
+    />
+      <TouchableOpacity style={styles.selectButton} onPress={()=>handleSeatSelectionNav()}>
         <Text style={styles.selectButtonText}>Select Seats</Text>
       </TouchableOpacity>
     </View>
@@ -65,91 +73,3 @@ const ShowTimesScreen = ({ navigation }) => {
 
 export default ShowTimesScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 16,
-  },
-  header: {
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  movieTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  subTitle: {
-    fontSize: 14,
-    color: '#888',
-  },
-  dateSection: {
-    marginBottom: 16,
-  },
-  dateLabel: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  dateButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-    backgroundColor: '#f0f0f0',
-    marginRight: 10,
-  },
-  selectedDate: {
-    backgroundColor: '#00aaff',
-  },
-  dateText: {
-    fontSize: 16,
-  },
-  showtimesSection: {
-    flex: 1,
-    marginBottom: 16,
-  },
-  showtimeContainer: {
-    flexDirection: 'row',
-    marginBottom: 16,
-  },
-  showtimeBox: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    flex: 1,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  seatImage: {
-    width: 100,
-    height: 100,
-    marginRight: 16,
-  },
-  showtimeInfo: {
-    flex: 1,
-  },
-  showtimeText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  hallText: {
-    fontSize: 14,
-    color: '#888',
-    marginBottom: 8,
-  },
-  priceText: {
-    fontSize: 14,
-    color: '#333',
-  },
-  selectButton: {
-    backgroundColor: '#00aaff',
-    paddingVertical: 16,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  selectButtonText: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-});
