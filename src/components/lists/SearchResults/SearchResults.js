@@ -23,6 +23,37 @@ const SearchResults = (props) => {
             category: 'Crime',
             image: require('../../../assets/images/atimetokill.jpg'),
         },
+        {
+            id: '4',
+            title: 'Out of Time',
+            category: 'Thriller',
+            image: require('../../../assets/images/outoftme.jpg'),
+        },
+        {
+            id: '5',
+            title: 'Once Upon a Time in Hollywood',
+            category: 'Drama',
+            image: require('../../../assets/images/onceuponatimehollywood.jpg'),
+        },
+        {
+            id: '6',
+            title: 'About Time',
+            category: 'Romance',
+            image: require('../../../assets/images/abouttime.jpg'),
+        },
+        {
+            id: '7',
+            title: 'Time Traveler\'s Wife',
+            category: 'Romantic Fantasy',
+            image: require('../../../assets/images/timetravelerswife.jpg'),
+        },
+        {
+            id: '8',
+            title: 'Edge of Tomorrow',
+            category: 'Action/Sci-Fi',
+            image: require('../../../assets/images/edgeoftomorrow.jpg'),
+        }
+        
     ];
 
     const filteredResults = searchResults.filter(item =>

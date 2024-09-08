@@ -9,10 +9,10 @@ const SelectSeat = ({ navigation, route }) => {
     const { item } = route.params
     console.log(item)
     const seatTypes = {
-        selected: '#FFD700', // gold
-        available: '#ADD8E6', // light blue
-        vip: '#4B0082', // purple
-        unavailable: '#D3D3D3', // light grey
+        selected: '#FFD700',
+        available: '#ADD8E6',
+        vip: '#4B0082', 
+        unavailable: '#D3D3D3', 
     };
     const seatLegend = [
         { label: 'Selected', color: seatTypes.selected },
@@ -30,12 +30,27 @@ const SelectSeat = ({ navigation, route }) => {
             <SeatsLayout />
             {/* Seat Types Legend */}
             <View style={styles.legend}>
-                {seatLegend.map((legendItem, index) => (
-                    <View key={index} style={styles.legendItem}>
-                        <View style={[styles.legendColorBox, { backgroundColor: legendItem.color }]} />
-                        <Text style={styles.seatslabel}>{legendItem.label}</Text>
+                <View>
+                    <View style={styles.legendItem}>
+                        <View style={[styles.legendColorBox, { backgroundColor: seatTypes.selected }]} />
+                        <Text style={styles.seatslabel}>Selected</Text>
                     </View>
-                ))}
+                    <View style={styles.legendItem}>
+                        <View style={[styles.legendColorBox, { backgroundColor: seatTypes.unavailable }]} />
+                        <Text style={styles.seatslabel}>Not Available</Text>
+                    </View>
+                </View>
+                <View>
+                    <View style={styles.legendItem}>
+                        <View style={[styles.legendColorBox, { backgroundColor: seatTypes.vip }]} />
+                        <Text style={styles.seatslabel}>VIP (150$)</Text>
+                    </View>
+                    <View style={styles.legendItem}>
+                        <View style={[styles.legendColorBox, { backgroundColor: seatTypes.available }]} />
+                        <Text style={styles.seatslabel}>Regular (50$)</Text>
+                    </View>
+                </View>
+
             </View>
             {/* Total Price and Proceed Button */}
             <View style={styles.footer}>
