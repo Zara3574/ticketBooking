@@ -14,8 +14,8 @@ const MainStack = () => {
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="ShowTimeSreen" component={ShowTimesScreen} />
                 <Stack.Screen name="Nav" component={TabNavigation} />
+                <Stack.Screen name="ShowTimeSreen" component={ShowTimesScreen} />
                 <Stack.Screen name="FilteredResults" component={FilteredREsults} />
                 <Stack.Screen name="Getticket" component={GetTicket} />
                 <Stack.Screen name="SeatSelection" component={SelectSeat} />

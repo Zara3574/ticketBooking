@@ -16,6 +16,7 @@ const TabNavigation = () => {
 
     return (
         <Tab.Navigator
+         initialRouteName="Watch"
             screenOptions={{
                 headerShown: false,
                 tabBarHideOnKeyboard: true,
@@ -23,21 +24,21 @@ const TabNavigation = () => {
                     position: 'absolute',
                     borderRadius: 30,
                     backgroundColor: '#2e2e2d',
-                    height: 65, // Adjust the height of the tab bar
+                    height: 65,
                     justifyContent: 'center',
                     paddingHorizontal:20,
-                     // Center items vertically
+                     
                 },
-                tabBarActiveTintColor: '#ffffff', // Active icon and text color
-                tabBarInactiveTintColor: '#bfbfbd', // Inactive icon and text color
+                tabBarActiveTintColor: '#ffffff', 
+                tabBarInactiveTintColor: '#bfbfbd', 
                 tabBarLabelStyle: {
-                    fontSize: 12, // Adjust the font size
+                    fontSize: 12, 
                     marginBottom: 15,
-                     // Center the label with the icon
+                     
                 },
                 tabBarIconStyle: {
                     marginTop:10,
-                    marginBottom: 0, // Align icon and text centrally
+                    marginBottom: 0, 
                 },
             }}
         >
@@ -52,7 +53,7 @@ const TabNavigation = () => {
                             tabBarIcon: ({ color, focused }) => (
                                 <Icon
                                     name={item.icon}
-                                    size={20} // Adjust icon size as needed
+                                    size={20} 
                                     color={color}
                                 />
                             ),

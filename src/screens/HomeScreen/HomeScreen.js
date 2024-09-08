@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, KeyboardAvoidingView,Text } from 'react-native';
+import { View, KeyboardAvoidingView, Text } from 'react-native';
 import styles from './styles';
-import Header from '../../components/Header/Header';
-import Searchbar from '../../components/SearchBar/searchbar';
+import Header from '../../components/headers/HeaderwithSearchbar/Header';
+import Searchbar from '../../components/headers/SearchBar/searchbar';
 import Categories from '../../components/Categories/Categories';
-import Movies from '../../components/Movies/Movies';
-import SearchResults from '../../components/SearchResults/SearchResults';
+import Movies from '../../components/lists/Movies/Movies';
+import SearchResults from '../../components/lists/SearchResults/SearchResults';
 const HomeScreen = ({ navigation }) => {
   const [check, setcheck] = useState("movies")
   const [checkresults, setcheckresults] = useState(true)
@@ -22,49 +22,41 @@ const HomeScreen = ({ navigation }) => {
     console.log(results)
     navigation.navigate("FilteredResults", { results: results })
   }
-  function handleGetTicketNav() {
 
-    navigation.navigate("Getticket")
-  }
   function handleclose() {
     setcheck('movies')
   }
   function handleSendResults(filteredResults) {
     console.log(filteredResults)
     setresults(filteredResults);
-    //handleResults(); // Optionally call handleResults or navigate here
   }
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView
-        style={styles.innerContainer}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        {
-          check == "movies" ?
+
+      {
+        check == "movies" ?
+          (
+            <View>
+              <Header onpress={() => handlecheck()} />
+              <Movies />
+            </View>
+          ) :
+          check === "categories" ?
             (
               <View>
-                <Header onpress={() => handlecheck()} />
-                <Movies />
+                <Searchbar onpress={(value) => handleResultscheck(value)} onend={() => handleResults()} onclose={() => handleclose()} />
+                {
+                  checkresults ?
+                    <Categories /> :
+                    <View style={styles.container}>
+                      <Text style={styles.sectionTitle}>Top Results</Text>
+                      <View style={styles.horizontalLine} />
+                      <SearchResults onpress={() => handleGetTicketNav()} text={movietitle} onSendResults={(filteredResults) => handleSendResults(filteredResults)} navigation={navigation} />
+                    </View>
+                }
               </View>
-            ) :
-            check === "categories" ?
-              (
-                <View>
-                  <Searchbar onpress={(value) => handleResultscheck(value)} onend={() => handleResults()} onclose={() => handleclose()} />
-                  {
-                    checkresults ?
-                      <Categories /> :
-                      <View style={styles.container}>
-                        <Text style={styles.sectionTitle}>Top Results</Text>
-                        <View style={styles.horizontalLine} />
-                        <SearchResults onpress={() => handleGetTicketNav()} text={movietitle} onSendResults={(filteredResults) => handleSendResults(filteredResults)} />
-                      </View>
-                  }
-                </View>
-              ) : null
-        }
-      </KeyboardAvoidingView>
+            ) : null
+      }
     </View>
   );
 };

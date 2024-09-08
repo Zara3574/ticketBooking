@@ -12,7 +12,7 @@ const GetTicket = ({ navigation,route }) => {
   ];
   function showtimeScreenNav()
   {
-    navigation.navigate("ShowTimeSreen")
+    navigation.navigate("ShowTimeSreen",{item})
   }
   return (
     <ScrollView contentContainerStyle={styles.container}>

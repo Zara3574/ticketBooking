@@ -2,26 +2,8 @@ import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1, // Ensures the content can stretch
         backgroundColor: '#f0f0f0',
-    },
-    header: {
-        flexDirection: 'row',
-        marginBottom: 16,
-        padding: 20,
-        backgroundColor: 'white',
-        alignItems: 'center',
-    },
-    movieTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: 'black'
-
-    },
-    subTitle: {
-        marginTop: 5,
-        fontSize: 16,
-        color: '#58b9f5',
     },
     dateSection: {
         marginBottom: 16,
@@ -52,53 +34,13 @@ export default styles = StyleSheet.create({
     },
     dateText: {
         fontSize: 16,
-    },
-    showtimesSection: {
-        marginBottom: 16,
-        margin: 15,
-    },
-    showtimeContainer: {
-        marginHorizontal: 10,
-    },
-    showtimeBox: {
-        borderWidth: 1,
-        borderColor: '#00aaff',
-        borderRadius: 10,
-        paddingVertical: 20,
-        paddingHorizontal: 40,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    seatImage: {
-        width: 220,
-        height: 140,
-    },
-    showtimeInfo: {
-        flexDirection: 'row'
-    },
-    showtimeText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#000',
-        marginRight: 20
-    },
-    hallText: {
-        fontSize: 16,
-        color: '#888',
-        marginBottom: 8,
-    },
-    priceText: {
-        marginTop: 10,
-        fontSize: 15,
-        color: '#333',
-    },
+    },    
     selectButton: {
         backgroundColor: '#00aaff',
         paddingVertical: 16,
         borderRadius: 10,
         alignItems: 'center',
-        margin: 20
+        margin: 20,
     },
     selectButtonText: {
         fontSize: 16,
